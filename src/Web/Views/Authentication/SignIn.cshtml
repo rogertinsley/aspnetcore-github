@@ -1,0 +1,14 @@
+@using Microsoft.AspNet.Http.Authentication
+@model AuthenticationDescription
+
+<div class="jumbotron">
+    <h1>GitHub Issues</h1>
+    <p class="lead text-left">You will need to connect your GitHub account to continue</p>
+
+    <form action="/signin" method="post">
+        <input type="hidden" name="Provider" value="@Model.AuthenticationScheme" />
+        <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+
+        <button class="btn btn-lg btn-success" type="submit">Connect using @Model.DisplayName</button>
+    </form>
+</div>
