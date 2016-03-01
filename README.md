@@ -14,8 +14,11 @@ Exploring ASP.NET CoreCLR
 ```
 
 ```
-git clone https://github.com/rogertinsley/githubspike (or a fork url instead)
-cd vagrant-aspnet-rc1
+git clone https://github.com/rogertinsley/githubspike
+cd aspnetcore-github
 vagrant up
 vagrant ssh
+cd src/web
+dnu restore
+dnx web
 ```
