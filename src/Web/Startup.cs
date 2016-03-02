@@ -80,7 +80,8 @@ namespace GitHubSpike
             {
                 ClientId = Configuration["GitHubClientID"],
                 ClientSecret = Configuration["GitHubClientSecret"],
-                Scope = { "user:email" }
+                Scope = { "user:email" },
+                SaveTokensAsClaims = true,
             });
 
             app.UseIISPlatformHandler();

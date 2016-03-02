@@ -13,7 +13,11 @@
                 <dt>@claim.Type</dt>
                 <dd>@claim.Value</dd>
             }
+                <dt>Access Token</dt>
+                <dd>@User.FindFirst("access_token")?.Value</dd>
         </dl>
+        
+        
         
     </div>
 </div>

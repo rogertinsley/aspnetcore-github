@@ -6,9 +6,7 @@ namespace GitHubSpike.Controllers
     [Authorize]
     public class IssuesController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        [HttpGet("~/")]
+        public ActionResult Index() => View();
     }
 }
