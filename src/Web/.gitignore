@@ -7,6 +7,8 @@ syntax: glob
 
 ### VisualStudio ###
 
+GitHub.db
+
 # User-specific files
 *.suo
 *.user

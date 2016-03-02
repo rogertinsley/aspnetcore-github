@@ -1,8 +1,10 @@
 using AspNet.Security.OAuth.GitHub;
+using GitHubSpike.Model;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,6 +35,8 @@ namespace GitHubSpike
             });
 
             services.AddMvc();
+            
+            services.AddEntityFramework().AddSqlite().AddDbContext<GitHubContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +52,20 @@ namespace GitHubSpike
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                
+                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+                try
+                {
+                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                        .CreateScope())
+                    {
+                        serviceScope.ServiceProvider
+                            .GetService<GitHubContext>()
+                            .Database.Migrate();
+                    }
+                }
+                catch { }
+
             }
             
             app.UseCookieAuthentication(new CookieAuthenticationOptions 
@@ -62,7 +80,7 @@ namespace GitHubSpike
             {
                 ClientId = Configuration["GitHubClientID"],
                 ClientSecret = Configuration["GitHubClientSecret"],
-                Scope = { "user:email" },
+                Scope = { "user:email" }
             });
 
             app.UseIISPlatformHandler();
