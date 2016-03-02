@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Http;
@@ -15,17 +14,6 @@ namespace Mvc.Client.Extensions
                 from description in context.Authentication.GetAuthenticationSchemes()
                     where !string.IsNullOrWhiteSpace(description.DisplayName)
                 select description;
-        }
-
-        public static bool IsProviderSupported(this HttpContext context, string provider) 
-        {
-            return (
-                
-                from description in context.GetExternalProviders()
-                    where string.Equals(description.AuthenticationScheme, provider, StringComparison.OrdinalIgnoreCase)
-                select description
-                
-            ).Any();
         }
     }
 }
