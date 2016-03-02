@@ -7,10 +7,13 @@ Exploring ASP.NET CoreCLR
 * ASP.NET RC1 installed according to the instructions in [http://docs.asp.net/en/latest/getting-started/installing-on-linux.html](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
 
 ```
-git clone https://github.com/rogertinsley/githubspike (or a fork url instead)
-cd vagrant-aspnet-rc1
+git clone https://github.com/rogertinsley/githubspike
+cd aspnetcore-github
 vagrant up
 vagrant ssh
+cd src/web
+dnu restore
+dnx web
 ```
 
 Port forwarding from host:5000 to guest:5000.
