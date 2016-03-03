@@ -1,4 +1,4 @@
-using System;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GitHubSpike.Services.Model;
@@ -7,14 +7,17 @@ namespace GitHubSpike.Services
 {
     public interface IGitHubGateway
     {
-        Task<ICollection<Repository>> RetrieveRepositories();
+        Task<ICollection<Issue>> GetIssues();
     }
 
     public class GitHubGateway : IGitHubGateway
     {
-        public Task<ICollection<Repository>> RetrieveRepositories()
+        public async Task<ICollection<Issue>> GetIssues()
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                return new List<Issue>();
+            }
         }
     }
 }
